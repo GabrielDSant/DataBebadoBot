@@ -6,12 +6,8 @@ const {
 } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("ContaAi")
-    .setDescription("Provides information about the user.")
-    .addStringOption((option) =>
-      option.setName("input").setDescription("The input to echo back")
-    )
-    .setRequired(true),
+    .setName('contar')
+    .setDescription("Vou puxar do meu banco uma história aleátoria para sua avaliação."),
   async execute(interaction) {
     // interaction.user is the object representing the User who ran the command
     // interaction.member is the GuildMember object, which represents the user in the specific guild
@@ -21,20 +17,20 @@ module.exports = {
 
     // Montando botões
     const confirm = new ButtonBuilder()
-      .setCustomId("confirm")
-      .setLabel("Confirm Ban")
-      .setStyle(ButtonStyle.Danger);
+      .setCustomId("Up")
+      .setLabel("Up Vote")
+      .setStyle(ButtonStyle.Secondary);
 
     const cancel = new ButtonBuilder()
-      .setCustomId("cancel")
-      .setLabel("Cancel")
+      .setCustomId("Down")
+      .setLabel("Down vote")
       .setStyle(ButtonStyle.Secondary);
 
     const row = new ActionRowBuilder().addComponents(cancel, confirm);
 
     // Enviando os botões
     const response = await interaction.reply({
-      content: `Are you sure you want to ban ${target} for reason: ${reason}?`,
+      content: `.................HISTORIA SERELEPE.................`,
       components: [row],
     });
 
@@ -47,17 +43,17 @@ module.exports = {
         time: 60000,
       });
 
-      if (confirmation.customId === "confirm") {
-        await interaction.guild.members.ban(target);
+      if (confirmation.customId === "Up") {
         await confirmation.update({
-          content: `${target.username} has been banned for reason: ${reason}`,
           components: [],
         });
-      } else if (confirmation.customId === "cancel") {
+        await interaction.channel.send('Pong!');
+
+      } else if (confirmation.customId === "Down") {
         await confirmation.update({
-          content: "Action cancelled",
           components: [],
         });
+        await interaction.channel.send('Pong!');
       }
     } catch (e) {
       await interaction.editReply({

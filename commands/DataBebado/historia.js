@@ -2,13 +2,14 @@ const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('Historia')
-		.setDescription('Provides information about the user.')
+		.setName('escutar')
+		.setDescription('Me envia tua historia mais maluca ai.')
 		.addStringOption(option =>
-			option.setName('input')
-				.setDescription('The input to echo back'))
-                .setRequired(true),
+			option.setName('historia')
+				.setDescription('Escreva sua história aqui')
+				.setRequired(true)),
 	async execute(interaction) {
+		
 		// interaction.user is the object representing the User who ran the command
 		// interaction.member is the GuildMember object, which represents the user in the specific guild
         
