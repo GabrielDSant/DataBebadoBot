@@ -17,18 +17,20 @@ module.exports = {
     //const category = interaction.options.getString('category') ?? 'No reason provided';
 
     // Montando botões
-    const confirm = new ButtonBuilder()
+    const upVote = new ButtonBuilder()
       .setCustomId("Up")
-      .setLabel("Up Vote")
-      .setStyle(ButtonStyle.Secondary);
+      .setLabel("upVote")
+      .setStyle(ButtonStyle.Primary)
+      .setEmoji('⬆️');
 
-    const cancel = new ButtonBuilder()
+    const downVote = new ButtonBuilder()
       .setCustomId("Down")
-      .setLabel("Down vote")
-      .setStyle(ButtonStyle.Secondary);
+      .setLabel("downVote")
+      .setStyle(ButtonStyle.Secondary)
+      .setEmoji('⬇️');
 
     // Criando a linha com os botões
-    const row = new ActionRowBuilder().addComponents(cancel, confirm);
+    const row = new ActionRowBuilder().addComponents(upVote, downVote);
 
     // Enviando os botões junto com o conteudo escrito...
     const response = await interaction.reply({
